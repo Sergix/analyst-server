@@ -7,7 +7,15 @@ from flask import Flask
 Import urllib as stockQuery
 
 #Flask instance
-#Which May need to be reconfigured 
+#Which may need to be reconfigured 
 app = Flask(__name__)
 
 #flaskRequests
+# All app request will be from?
+#root?
+@app.route('/')
+#function to fire
+def dashboard():
+    #code here
+#END
+
