@@ -67,7 +67,7 @@ class ApiHandler:
         #parse the api paramaters
         Self.queryParam = parse.urlencode(Self.queryParam)
         #create the api url query string
-        Self.query = Self.Url + "query?"+ Self.queryParam
+        Self.query = Self.Url + "query?" + Self.queryParam
     #END
         
     def retrieveQuery(Self):
