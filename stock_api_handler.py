@@ -1,6 +1,6 @@
 # This python script handles stock api request
 # Last Updated: 3/18/2020
-# Credits:
+# Credits:nóto
 
 #Import request and parse from urllib so we can request from the api
 from urllib import request, parse
