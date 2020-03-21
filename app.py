@@ -16,7 +16,7 @@ def client_side_query():
     #optional query interval
     i = request.args.get('interval')
     #return api data
-    return(api.autoQuery(t,f,i))
+    return("<pre style="word-wrap: break-word; white-space: pre-wrap;">" + api.autoQuery(t,f,i) + "</pre>")
   else:
     #abort bad request
     abort(400)
