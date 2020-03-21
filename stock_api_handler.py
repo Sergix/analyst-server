@@ -108,7 +108,7 @@ class ApiHandler:
                 self.data[self.function].update(
                     {
                         #We will fix this later lol
-                        (str(i)[4:]):(self.json[(list(self.json)[0])]).values()
+                        (str(i)[4:]):list((self.json[(list(self.json)[0])]).values())
                      })
         elif a == 1 and self.function=="search":
              #There is no meta data but, we need to clean our json
