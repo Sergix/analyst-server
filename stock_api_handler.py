@@ -130,6 +130,6 @@ class ApiHandler:
         #fetch data
         self.retrieveQuery()
         #return data
-        return(json.dumps(self.data))
+        return(json.dumps(self.data, indent=2))
         #END
     #END
