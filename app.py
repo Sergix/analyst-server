@@ -16,7 +16,7 @@ def client_side_query():
     #optional query interval
     i = request.args.get('interval')
     #return api data
-    return(str(api.autoQuery(t,f,i)))
+    return(api.autoQuery(t,f,i))
   else:
     #abort bad request
     abort(400)
