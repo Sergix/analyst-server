@@ -110,7 +110,7 @@ class ApiHandler:
                 self.data[self.function].update(
                     {
                         #We will fix this later lol
-                        (str(i)[4:]):list(api.json[(list(api.json)[0])].values())[loop_count]
+                        (str(i)[4:]):list(self.json[(list(self.json)[0])].values())[loop_count]
                      })
                 loop_count += 1
         elif a == 1 and self.function=="search":
