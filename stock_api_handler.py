@@ -102,14 +102,17 @@ class ApiHandler:
             return(self.data)
         elif a == 1 and self.function == "stock":
             #There is no meta data but, we need to clean our json
+            #loop counter
+            loop_count = 0
             #loop over json keys
             for i in self.json[list(self.json)[0]]:
                 #create final result
                 self.data[self.function].update(
                     {
                         #We will fix this later lol
-                        (str(i)[4:]):(self.json[(list(self.json)[0])]).values()
+                        (str(i)[4:]):list(self.json[(list(self.json)[0])].values())[loop_count]
                      })
+                loop_count += 1
         elif a == 1 and self.function=="search":
              #There is no meta data but, we need to clean our json
             #loop over json keys
@@ -130,6 +133,6 @@ class ApiHandler:
         #fetch data
         self.retrieveQuery()
         #return data
-        return self.data
+        return(json.dumps(self.data, indent=2))
         #END
     #END
