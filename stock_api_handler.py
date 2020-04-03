@@ -123,8 +123,7 @@ class ApiHandler:
                         (i[(list(i)[0])]):list(i.values())
                     })
         else:
-            return  ValueError('Error: query json was incorrectly structured')
-            
+            return  ValueError('Error: query json was incorrectly structured') 
         #END
     #make life easy :)
     def autoQuery(self, t, f, i="5min"):
@@ -133,7 +132,6 @@ class ApiHandler:
         #fetch data
         self.retrieveQuery()
         #return data
-
         return(json.dumps(self.data, indent=2))
         #END
     #END
