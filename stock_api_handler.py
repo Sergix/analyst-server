@@ -123,7 +123,7 @@ class ApiHandler:
                         (i[(list(i)[0])]):list(i.values())
                     })
         else:
-            return  ValueError('Error: query_json was incorrectly structur)
+            return  ValueError('Error: query json was incorrectly structured')
             
         #END
     #make life easy :)
