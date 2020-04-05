@@ -15,7 +15,7 @@ class NewsApi():
         self.apiKey = '00c5d9ca4de7403889beb4beca08c1d3'
         self.language = "en"
     
-    def createQuery(self, ticker, language="en"):
+    def createQuery(self, ticker, language):
         self.queryParam = {
             "q":str(ticker) + " Stock",
             "language": str(language),
@@ -42,8 +42,8 @@ class NewsApi():
             raise ValueError('Error: Api Connection Failed')
     #END
     #to make life easy :)
-    def autoQuery(t,l):
-        self.createQuery(t,l)
+    def autoQuery(t,lang='en'):
+        self.createQuery(t,lang)
         self.retrieveQuery()
         return(json.dumps(self.json, indent=2))
     #END
