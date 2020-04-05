@@ -17,7 +17,7 @@ def stock_query():
     #optional query interval
     i = request.args.get('interval')
     #return api data
-    return("stockApi.autoQuery(t,f,i))
+    return(stockApi.autoQuery(t,f,i))
   else:
     #abort bad request
     abort(400)
