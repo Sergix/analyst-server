@@ -17,7 +17,7 @@ class NewsApi():
     def createQuery(self, ticker, language='en'):
         self.queryParam = {
             "q":str(ticker) + " Stock",
-            "language": languag,
+            "language": language,
             "apikey": str(self.apiKey)           
         }
         self.parseQuery()
