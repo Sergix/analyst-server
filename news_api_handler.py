@@ -45,5 +45,5 @@ class NewsApi():
     def autoQuery(self, t, lang="en"):
         self.createQuery(t, lang)
         self.retrieveQuery()
-        return(self.query + "<br>"+ language + "<br>"+ json.dumps(self.json, indent=2))
+        return(self.query + "<br>"+ self.language + "<br>"+ json.dumps(self.json, indent=2))
     #END
