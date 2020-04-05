@@ -42,7 +42,7 @@ class NewsApi():
             raise ValueError('Error: Api Connection Failed')
     #END
     #to make life easy :)
-    def autoQuery(t,lang='en'):
+    def autoQuery(self, t, lang='en'):
         self.createQuery(t,lang)
         self.retrieveQuery()
         return(json.dumps(self.json, indent=2))
