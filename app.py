@@ -30,7 +30,7 @@ def news_query():
     #our ticker aka stock letter
     t = request.args['ticker']
     #our data language return type
-    l  request.args.get('language')
+    l = request.args.get('language')
     #return api data
     return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + api.autoQuery(t,l) +  "</pre>")
   else:
