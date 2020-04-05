@@ -32,7 +32,10 @@ def news_query():
     #our data language return type
     l = request.args.get('language')
     #return api data
-    return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + newsApi.autoQuery(t,l) +  "</pre>")
+    if(l == None) or (type(l) != "String"):
+      return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + newsApi.autoQuery(t, "en") +  "</pre>")
+    else:
+      return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + newsApi.autoQuery(t,l) +  "</pre>")
   else:
     #abort bad request
     abort(400)
