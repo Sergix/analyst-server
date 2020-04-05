@@ -13,7 +13,6 @@ class NewsApi():
     def __init__(self):
         self.url = "https://newsapi.org/v2/"
         self.apiKey = '00c5d9ca4de7403889beb4beca08c1d3'
-        self.language = "en"
     
     def createQuery(self, ticker, language):
         self.queryParam = {
@@ -42,8 +41,8 @@ class NewsApi():
             raise ValueError('Error: Api Connection Failed')
     #END
     #to make life easy :)
-    def autoQuery(self, t, lang='en'):
-        self.createQuery(t,lang)
+    def autoQuery(self, t, lang="en"):
+        self.createQuery(t, lang)
         self.retrieveQuery()
         return(json.dumps(self.json, indent=2))
     #END
