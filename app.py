@@ -17,7 +17,7 @@ def stock_query():
     #optional query interval
     i = request.args.get('interval')
     #return api data
-    return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + stockApi.autoQuery(t,f,i) + "</pre>")
+    return("stockApi.autoQuery(t,f,i))
   else:
     #abort bad request
     abort(400)
