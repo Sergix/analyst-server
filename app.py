@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, abort
+from flask_cors import CORS
 from stock_api_handler import ApiHandler
 from news_api_handler import NewsApi 
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route("/stockQuery/")
 def stock_query():
