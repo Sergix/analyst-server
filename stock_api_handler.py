@@ -29,7 +29,7 @@ class ApiHandler:
             if(i == None):
                 i = "5min"
             self.queryParam = {
-                "function":"TIME_SERIES_DAILY_ADJUSTED",
+                "function":"TIME_SERIES_INTRADAY",
                 "symbol":self.Stock,
                 "interval": i,
                 "datatype":"json",
