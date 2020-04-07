@@ -114,14 +114,15 @@ class ApiHandler:
                      })
                 loop_count += 1
         elif a == 1 and self.function=="search":
+            self.data = self.json
              #There is no meta data but, we need to clean our json
             #loop over json keys
-            for i in self.json[list(self.json)[0]]:
-                self.data[self.function].update(
-                    {
-                        #We will fix this later lol
-                        (i[(list(i)[0])]):list(i.values())
-                    })
+            #for i in self.json[list(self.json)[0]]:
+              #  self.data[self.function].update(
+                #    {
+                  #      #We will fix this later lol
+                    #    (i[(list(i)[0])]):list(i.values())
+                    #})
         else:
             return  ValueError('Error: query json was incorrectly structured') 
         #END
