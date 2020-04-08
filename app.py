@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, abort
 from flask_cors import CORS
-from stock_api_handler import ApiHandler
+from stock_api_handler import StockApi
 from news_api_handler import NewsApi 
 
 app = Flask(__name__)
@@ -10,15 +10,10 @@ CORS(app)
 def stock_query():
   #if client requesting data -get- 
   if request.method == "GET":
-    stockApi = ApiHandler()
+    stockApi = StockApi()
     #our ticker aka stock letter
     t = request.args['ticker']
-    #our query type 
-    f = request.args['request']
-    #optional query interval
-    i = request.args.get('interval')
-    #return api data
-    return(stockApi.autoQuery(t,f,i))
+    return(stockApi.request_data(t))
   else:
     #abort bad request
     abort(400)
@@ -34,9 +29,9 @@ def news_query():
     l = request.args.get('language')
     #return api data
     if(l == None) or (type(l) != "String"):
-      return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + newsApi.autoQuery(t, "en") +  "</pre>")
+      return(newsApi.autoQuery(t, "en"))
     else:
-      return("<pre style='word-wrap: break-word; white-space: pre-wrap;'>" + newsApi.autoQuery(t,l) +  "</pre>")
+      return(newsApi.autoQuery(t,l))
   else:
     #abort bad request
     abort(400)
