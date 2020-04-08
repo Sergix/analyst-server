@@ -19,7 +19,7 @@ class StockApi():
         #Retrieve data and store as Panda Data Frame
         self.unclean_data = stock.history(period=p,interval=i)
         #unclean_data selectors stored in an array
-        self.data_selectors = list(api.unclean_data.columns)
+        self.data_selectors = list(self.unclean_data.columns)
         #create list of the index values which the  values are equal to the time stamps of our data
         self.time_stamps = list(self.unclean_data.index)
         #get the length
