@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, abort
 from flask_cors import CORS
+from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 from news_api_handler import NewsApi 
 
@@ -17,7 +18,18 @@ def stock_query():
   else:
     #abort bad request
     abort(400)
-
+    
+@app.route("/searchQuery/")
+def search_query():
+  #if client requesting data -get- 
+  if request.method == "GET":
+    searchApi = SearchApi()
+    #our ticker aka stock letter
+    keyword = request.args['ticker']
+    return(searchApi.search_data(keyword))
+  else:
+    #abort bad request
+    abort(400)
 @app.route("/newsQuery/")
 def news_query():
   #if client requesting data -get- 
