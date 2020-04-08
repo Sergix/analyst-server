@@ -1,138 +1,53 @@
-# This python script handles stock api request
-# Last Updated: 3/18/2020
+# This python script handles stock api request from yfinance
+# Last Updated: 4/7/2020
 # Credits:nóto
 
-#Import request and parse from urllib so we can request from the api
-from urllib import request as req
-from urllib import parse
+#import yfinance api lib
+import yfinance as yf
+#import pandas lib
+import pandas as pd
 #Import json to manipulate api data
 import json
 
-
-#create a class to handle our stock api
-class ApiHandler:
+class StockApi():
     def __init__(self):
-        self.Url = "https://www.alphavantage.co/"
-        self.apikey = "4WXA1UZXP1MVFLPG"
-    #END
+        self.panda = pd
 
-    #this method creates our api queryurls
-    def createQuery(self, t, r, i=None):
-        # t -ticker- is the stock letters
-        # r -response type- is the type of request we are going to be making to the api
-        # i is the interval 
-        # we will assume that all our parameters correct
-        self.function = r
-        self.Stock = t
-        if(r == "points"):
-            #We need to return stock points from the api for charting on the front end
-            if(i == None):
-                i = "5min"
-            self.queryParam = {
-                "function":"TIME_SERIES_INTRADAY",
-                "symbol":self.Stock,
-                "interval": i,
-                "datatype":"json",
-                "apikey":self.apikey
-                }
-
-            self.parseQuery()
-            
-        #END
-        elif(r == "stock"):
-            #We need to return stock info from the api
-            self.queryParam = {
-                "function":"GLOBAL_QUOTE",
-                "symbol":self.Stock,
-                "datatype":"json",
-                "apikey":self.apikey
-                }
-            self.parseQuery()
-            
-            #END
-        elif(r == "search"):
-            #We need to search stock letters from the api
-             self.queryParam = {
-                "function":"SYMBOL_SEARCH",
-                "keywords":self.Stock,
-                "datatype":"json",
-                "apikey":self.apikey
-                }
-             
-             self.parseQuery()
-        else :
-            raise ValueError('Error: Incorrect Handler Request Method')
-            #END
+    def request_data(self, t, p='1d', i="5m", format='default',  start_period=None, end_period=None):
+        #set the stock we would like to search for
+        stock = yf.Ticker(t)
+        #Retrieve data and store as Panda Data Frame
+        self.unclean_data = stock.history(period=p,interval=i)
+        #unclean_data selectors stored in an array
+        self.data_selectors = list(api.unclean_data.columns)
+        #create list of the index values which the  values are equal to the time stamps of our data
+        self.time_stamps = list(self.unclean_data.index)
+        #get the length
+        self.time_stamp_total_length = len(self.time_stamps)
+        #now let us clean the data
+        self.clean_data()
+        #lets convert the data  and return it back to what ever called us
+        return self.convert_data()
     #END
     
-    def parseQuery(self):
-        #parse the api paramaters
-        self.queryParam = parse.urlencode(self.queryParam)
-        #create the api url query string
-        self.query = self.Url + "query?"+ self.queryParam
+    #function to organize 'clean' the stock data
+    def clean_data(self):
+        #function to clean panda data returned by Api
+        #
+        self.new_data = {
+
+            }
+        for count in range(self.time_stamp_total_length):
+            #get the next timestamp and store it as a string
+            self.new_time_stamp = str(self.time_stamps[count])
+            #insert new data here
+            self.new_data.update({self.new_time_stamp:self.unclean_data.iloc[count].to_list()})
+        #return the new data
+        return self.new_data
     #END
-        
-    def retrieveQuery(self):
-        #query the srtring and the store api's response
-        self.apiResp = req.urlopen(self.query)
-        #if connection is connected
-        if(self.apiResp.isclosed() == False):
-            #Store json Data
-            self.json = json.load(self.apiResp)
-        else:
-            raise ValueError('Error: Api Connection Failed')
-        #clean Json and return Data
-        self.cleanJson(len(self.json))   
-    def cleanJson(self, a=1):
-        self.data = {
-                self.function:{
-                        #We will update-insert- data here
-                    }
-             }
-        if a == 2:
-            #There is meta data let's get ride of it and clean our json
-            #loop over json keys
-            for i in self.json[(list(self.json)[1])]:
-                #create final result
-                self.data[self.function].update(
-                    {
-                        #We will fix this later lol
-                         i:list(((self.json[(list(self.json)[1])])[i]).values())
-                    })
-            return(self.data)
-        elif a == 1 and self.function == "stock":
-            #There is no meta data but, we need to clean our json
-            #loop counter
-            loop_count = 0
-            #loop over json keys
-            for i in self.json[list(self.json)[0]]:
-                #create final result
-                self.data[self.function].update(
-                    {
-                        #We will fix this later lol
-                        (str(i)[4:]):list(self.json[(list(self.json)[0])].values())[loop_count]
-                     })
-                loop_count += 1
-        elif a == 1 and self.function=="search":
-            self.data = self.json
-             #There is no meta data but, we need to clean our json
-            #loop over json keys
-            #for i in self.json[list(self.json)[0]]:
-              #  self.data[self.function].update(
-                #    {
-                  #      #We will fix this later lol
-                    #    (i[(list(i)[0])]):list(i.values())
-                    #})
-        else:
-            return  ValueError('Error: query json was incorrectly structured') 
-        #END
-    #make life easy :)
-    def autoQuery(self, t, f, i="5min"):
-        #create our query URL
-        self.createQuery(t,f,i)
-        #fetch data
-        self.retrieveQuery()
-        #return data
-        return(json.dumps(self.data, indent=2))
-        #END
+    
+    #function to convert the data so the front end can read it
+    def convert_data(self):
+        self.new_data = json.dumps(self.new_data, indent=2)
+        return self.new_data
     #END
