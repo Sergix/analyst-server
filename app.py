@@ -19,7 +19,10 @@ def stock_query():
     #interval tag
     interval = request.args.get('interval')
     #call api and return data
-    return(stockApi.request_data(ticker, period, interval))
+    if(interval) and (period):
+      return(stockApi.request_data(ticker, period, interval))
+    else:
+      return(stockApi.request_data(ticker))
   else:
     #abort bad request
     abort(400)
