@@ -15,7 +15,7 @@ class StockApi():
 
     def request_data(self, t, p='1d', i="5m"):
         #set the stock we would like to search for
-        stock = yf.Ticker(ticker)
+        stock = yf.Ticker(t)
         #Retrieve data and store as Panda Data Frame
         self.unclean_data = stock.history(period=p,interval=i)
         #unclean_data selectors stored in an array
