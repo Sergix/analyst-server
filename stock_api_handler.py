@@ -13,7 +13,7 @@ class StockApi():
     def __init__(self):
         self.panda = pd
 
-    def request_data(self, t, p='1d', i="5m", format='default',  start_period=None, end_period=None):
+    def request_data(self, t, p='1d', i="5m"):
         #set the stock we would like to search for
         stock = yf.Ticker(t)
         #Retrieve data and store as Panda Data Frame
