@@ -14,7 +14,12 @@ def stock_query():
     stockApi = StockApi()
     #our ticker aka stock letter
     t = request.args['ticker']
-    return(stockApi.request_data(t))
+    #period tag
+    p = request.args.get('period')
+    #interval tag
+    i = request.args.get('interval')
+    #call api and return data
+    return(stockApi.request_data(t, p, i))
   else:
     #abort bad request
     abort(400)
