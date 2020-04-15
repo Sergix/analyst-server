@@ -14,7 +14,7 @@ import os
 class NewsApi():
     def __init__(self):
         self.url = "https://newsapi.org/v2/"
-        self.apiKey =   return os.environ["news_newsapi_key"]
+        self.apiKey = os.environ["news_newsapi_key"]
     
     def createQuery(self, ticker, lan):
         self.queryParam = {
