@@ -3,9 +3,15 @@ from flask_cors import CORS
 from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 from news_api_handler import NewsApi 
+import os
+
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/test/")
+def env():
+  return os.environ["TEST"]
 
 @app.route("/stockQuery/")
 def stock_query():
