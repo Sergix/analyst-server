@@ -22,7 +22,7 @@ class NewsApi():
     def createQuery(self, ticker):
         self.queryParam = {
             "q":str(ticker),
-            "api=key": str(self.apiKey)           
+            "api-key": str(self.apiKey)           
         }
         self.parseQuery()
     #END
