@@ -4,8 +4,6 @@ from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 from news.org import handler as org
 
-org = org.NewsApi()
-
 
 
 app = Flask(__name__)
@@ -46,7 +44,7 @@ def search_query():
 def news_query():
   #if client requesting data -get- 
   if request.method == "GET":
-    newsApi = NewsApi()
+    newsApi = org.NewsApi()
     #our ticker aka stock letter
     t = request.args['ticker']
     #our data language return type
