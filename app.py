@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, abort
 from flask_cors import CORS
 from search_api_handler import SearchApi
 from stock_api_handler import StockApi
-from news_api_handler import NewsApi 
+from news.org.handler import NewsApi 
+
+NewsApi = NewsApi.NewsApi()
 
 
 
