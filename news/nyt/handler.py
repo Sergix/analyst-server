@@ -31,7 +31,7 @@ class NewsApi():
         #parse the api paramaters
         self.queryParam = parse.urlencode(self.queryParam)
         #create the api url query string
-        self.query = self.url + "everything?" + self.queryParam
+        self.query = self.url + self.queryParam
         print(self.query)
     #END
 
