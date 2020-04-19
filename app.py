@@ -48,12 +48,7 @@ def news_query():
     #our ticker aka stock letter
     t = request.args['ticker']
     #our data language return type
-    l = request.args.get('language')
-    #return api data
-    if(l == None) or (type(l) != "String"):
-      return(newsApi.autoQuery(t, "en"))
-    else:
-      return(newsApi.autoQuery(t,l))
+    return(newsApi.autoQuery(t))
   else:
     #abort bad request
     abort(400)
