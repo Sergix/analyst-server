@@ -8,11 +8,13 @@ from urllib import request as req
 from urllib import parse
 #Import json to manipulate api data
 import json
+#import os for env vars that hold api-keys
+import os
 
 class NewsApi():
     def __init__(self):
         self.url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"
-        self.apiKey = '8ybuxiDjnm5V9WxJj3XSLGYzB5FIAqIm'
+        self.apiKey = os.environ['nyt_api_key']
     
     def createQuery(self, ticker):
         self.queryParam = {
