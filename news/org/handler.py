@@ -53,7 +53,8 @@ class NewsApi():
               'title': (data[i])['title'],
               'content': (data[i])['description'],
               'url': (data[i])['url'],
-              'urlImage':(data[i])['urlToImage']
+              'urlImage':(data[i])['urlToImage'],
+              'timestamp': (data[i])['publishedAt']
             })
       else:
           for i in range(len(data)):
@@ -61,7 +62,8 @@ class NewsApi():
               'title': (data[i])['title'],
               'content': (data[i])['description'],
               'url': (data[i])['url'],
-              'urlImage':(data[i])['urlToImage']
+              'urlImage':(data[i])['urlToImage'],
+              'timestamp': (data[i])['publishedAt']
             })
             
           self.json = data_json
