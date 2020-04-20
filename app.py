@@ -3,6 +3,7 @@ from flask_cors import CORS
 from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 import news.handler as news
+import json
 
 
 
