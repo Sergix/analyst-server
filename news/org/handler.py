@@ -9,6 +9,8 @@ from urllib import request as req
 from urllib import parse
 #Import json to manipulate api data
 import json
+#import os for env vars that hold api keys
+import os
 
 class NewsApi():
     def __init__(self):
