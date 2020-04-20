@@ -1,7 +1,8 @@
 # This python script handles news api request
-#created 4/2/2020
-# Last Updated: 4/3/2020
+#created 4/19/2020
+# Last Updated: 4/19/2020
 # Credits:nóto
+
 
 #Import request and parse from urllib so we can request from the api
 from urllib import request as req
