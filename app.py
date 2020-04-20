@@ -48,7 +48,7 @@ def news_query():
     #our ticker aka stock letter
     t = request.args['ticker']
     #our data language return type
-    return(newsApi.newsQuery(t))
+    return(json.dumps(newsApi.newsQuery(t), indent=2))
   else:
     #abort bad request
     abort(400)
