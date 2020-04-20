@@ -18,4 +18,6 @@ def newsQuery(ticker):
   formated_json = { 
             'articles': org_json['articles'] + nyt_json['articles']
   }
+
+  formated_json['articles'].sort(key=lambda x:x['timestamp'])
   return(formated_json)
