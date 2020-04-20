@@ -1,11 +1,6 @@
-api = {
-  'key': '00c5d9ca4de7403889beb4beca08c1d3',
-  'url': 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
-}
-
 # This python script handles news api request
-#created 4/2/2020
-# Last Updated: 4/3/2020
+#created 4/19/2020
+# Last Updated: 4/19/2020
 # Credits:nóto
 
 #Import request and parse from urllib so we can request from the api
@@ -46,9 +41,41 @@ class NewsApi():
             raise ValueError('Error: Api Connection Failed')
     #END
 
+    def format_data(self):
+        self.new_json = {
+            'articles': []
+        }
+
+        if(len(self.json['response']['docs']) > 5):
+            for i in range(5):
+                self.update_data(i)
+            self.json = self.new_json
+        else:
+            for i in range(len(self.json['response']['docs'])):
+                self.update_data(i)
+            self.json = self.new_json
+
+    def update_data(self, index):
+        try:
+            self.new_json['articles'].append({
+                'title': self.json['response']['docs'][index]['abstract'],
+                'timestamp': self.json['response']['docs'][index]['pub_date'],
+                'content': self.json['response']['docs'][index]['lead_paragraph'],
+                'url': self.json['response']['docs'][index]['web_url'],
+                'urlImage':"https://www.nytimes.com/" + self.json['response']['docs'][index]['multimedia'][27]['url']
+            })
+        except:
+            self.new_json['articles'].append({
+                'title': self.json['response']['docs'][index]['abstract'],
+                'timestamp': self.json['response']['docs'][index]['pub_date'],
+                'content': self.json['response']['docs'][index]['lead_paragraph'],
+                'url': self.json['response']['docs'][index]['web_url'],
+                'urlImage':''
+            })
     #to make life easy :)
     def autoQuery(self, t):
         self.createQuery(t)
         self.retrieveQuery()
+        self.format_data()
         return(self.json)
     #END
