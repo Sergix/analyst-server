@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, abort
 from flask_cors import CORS
 from search_api_handler import SearchApi
 from stock_api_handler import StockApi
-from news.nyt import handler as org
+from news.handler import news
 
 
 
@@ -44,11 +44,11 @@ def search_query():
 def news_query():
   #if client requesting data -get- 
   if request.method == "GET":
-    newsApi = org.NewsApi()
+    newsApi = news
     #our ticker aka stock letter
     t = request.args['ticker']
     #our data language return type
-    return(newsApi.autoQuery(t))
+    return(newsApi.newsQuery(t))
   else:
     #abort bad request
     abort(400)
