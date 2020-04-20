@@ -20,4 +20,6 @@ def newsQuery(ticker):
   }
 
   formated_json['articles'].sort(key=lambda x:x['timestamp'])
+  #reverse list so we can see the latest news first
+  formated_json['articles'] = list(reversed(formated_json['articles']))
   return(formated_json)
