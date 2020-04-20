@@ -3,9 +3,9 @@
 # Last Updated: 4/19/2020
 # Credits:nóto
 
-import nyt.handler as nyt
+import news.nyt.handler as nyt
 nyt = nyt.NewsApi()
-import org.handler as org
+import news.org.handler as org
 org = org.NewsApi()
 
 
