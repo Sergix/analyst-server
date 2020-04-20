@@ -1,18 +1,21 @@
 # This python script handles news api request
-#created 4/2/2020
-# Last Updated: 4/3/2020
+#created 4/19/2020
+# Last Updated: 4/19/2020
 # Credits:nóto
+
 
 #Import request and parse from urllib so we can request from the api
 from urllib import request as req
 from urllib import parse
 #Import json to manipulate api data
 import json
+#import os for env vars that hold api keys
+import os
 
 class NewsApi():
     def __init__(self):
         self.url = "https://newsapi.org/v2/"
-        self.apiKey = '00c5d9ca4de7403889beb4beca08c1d3'
+        self.apiKey = os.environ['org_api_key']
     
     def createQuery(self, ticker, lan):
         self.queryParam = {
@@ -40,9 +43,37 @@ class NewsApi():
         else:
             raise ValueError('Error: Api Connection Failed')
     #END
+    def format_data(self):
+      data = self.json["articles"]
+      data_json = {
+          'articles': []
+        }
+
+      if(len(data) > 20):
+          for i in range(20):
+            data_json['articles'].append({
+              'title': (data[i])['title'],
+              'content': (data[i])['description'],
+              'url': (data[i])['url'],
+              'urlImage':(data[i])['urlToImage'],
+              'timestamp': (data[i])['publishedAt']
+            })
+      else:
+          for i in range(len(data)):
+            data_json['articles'].append({
+              'title': (data[i])['title'],
+              'content': (data[i])['description'],
+              'url': (data[i])['url'],
+              'urlImage':(data[i])['urlToImage'],
+              'timestamp': (data[i])['publishedAt']
+            })
+            
+          self.json = data_json
+    #END
     #to make life easy :)
     def autoQuery(self, t, lang):
         self.createQuery(t, lang)
         self.retrieveQuery()
-        return(json.dumps(self.json, indent=2))
+        self.format_data()
+        return(self.json)
     #END
