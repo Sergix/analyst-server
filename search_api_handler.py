@@ -29,7 +29,7 @@ class SearchApi():
         self.json = {
             self.json
         }
-        return self.json
+        return json.dump(self.json)
     #END
     def clean_data(self):
         #create a dictionary to store new data 
