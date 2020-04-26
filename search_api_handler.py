@@ -25,15 +25,16 @@ class SearchApi():
         else:
             raise ValueError('Error: Api Connection Failed')
         #return the data cleaned
-        return type(self.json)
+        return self.clean_data()
     #END
     def clean_data(self):
         #create a dictionary to store new data 
         self.new_data = {}
         #loop over the array sent back by the api
-        for i in self.json:
+        #for i in self.json:
             #add data to our new dictionary
-            self.new_data.update({i['symbol']:i['name']})
+            #self.new_data.update({i['symbol']:i['name']})
         #return that data
+        self.new_data.update(self.json)
         return self.new_data
     #END
