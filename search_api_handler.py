@@ -32,6 +32,6 @@ class SearchApi():
         self.new_data = {}
         
         #return that data
-        self.new_data.update({'data':self.json})
+        self.new_data.update({'ticker_data':self.json})
         return self.new_data
     #END
