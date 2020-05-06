@@ -18,6 +18,7 @@ class StockApi():
         stock = yf.Ticker(t)
         #Retrieve data and store as Panda Data Frame
         self.unclean_data = stock.history(period=p,interval=i)
+        print(self.unclean_data)
         #unclean_data selectors stored in an array
         self.data_selectors = list(self.unclean_data.columns)
         #create list of the index values which the  values are equal to the time stamps of our data
@@ -49,6 +50,6 @@ class StockApi():
     #function to convert the data so the front end can read it
     def convert_data(self):
         self.new_data = json.dumps(self.new_data, indent=2)
-        print(self.new_data)
+        #print(self.new_data)
         return self.new_data
     #END
