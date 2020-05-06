@@ -2,12 +2,14 @@
 # Last Updated: 4/7/2020
 # Credits:nóto
 
-#import yfinance api lib
+#Import yfinance api lib
 import yfinance as yf
-#import pandas lib
+#Import pandas lib
 import pandas as pd
 #Import json to manipulate api data
 import json
+#Import math
+import math
 
 class StockApi():
     def __init__(self):
