@@ -1,5 +1,5 @@
-from sklearn import linear_model
+#from sklearn import linear_model
 
-reg = linear_model.LinearRegression()
+#reg = linear_model.LinearRegression()
 
-print(dir(sk))
+#print(dir(sk))
