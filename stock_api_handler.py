@@ -49,5 +49,6 @@ class StockApi():
     #function to convert the data so the front end can read it
     def convert_data(self):
         self.new_data = json.dumps(self.new_data, indent=2)
+        print(self.new_data)
         return self.new_data
     #END
