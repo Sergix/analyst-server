@@ -2,12 +2,14 @@
 # Last Updated: 4/7/2020
 # Credits:nóto
 
-#import yfinance api lib
+#Import yfinance api lib
 import yfinance as yf
-#import pandas lib
+#Import pandas lib
 import pandas as pd
 #Import json to manipulate api data
 import json
+#Import math
+import math
 
 class StockApi():
     def __init__(self):
@@ -41,7 +43,8 @@ class StockApi():
             #get the next timestamp and store it as a string
             self.new_time_stamp = str(self.time_stamps[count])
             #insert new data here
-            self.new_data.update({self.new_time_stamp:self.unclean_data.iloc[count].to_list()})
+            if(not math.isnan((self.unclean_data.iloc[count].to_list())[0])):
+                self.new_data.update({self.new_time_stamp:self.unclean_data.iloc[count].to_list()})
         #return the new data
         return self.new_data
     #END
