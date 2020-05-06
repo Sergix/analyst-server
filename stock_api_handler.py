@@ -44,7 +44,7 @@ class StockApi():
             #get the next timestamp and store it as a string
             self.new_time_stamp = str(self.time_stamps[count])
             #insert new data here
-            if(math.isnan((self.unclean_data.iloc[count].to_list())[0])):
+            if(not math.isnan((self.unclean_data.iloc[count].to_list())[0])):
                 self.new_data.update({self.new_time_stamp:self.unclean_data.iloc[count].to_list()})
         #return the new data
         return self.new_data
