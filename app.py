@@ -3,6 +3,7 @@ from flask_cors import CORS
 from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 import news.handler as news
+import news.ml as news_data_set
 import json
 
 
@@ -53,5 +54,16 @@ def news_query():
   else:
     #abort bad request
     abort(400)
+
+@app.route('/ml-news-data-set/')
+def data_set():
+  if request.method == "GET":
+    #our ticker aka stock letter
+    t = request.args['ticker']
+
+    return()
+  else:
+    abort(400)
+    
 if __name__ == "__main__":
   app.run()
