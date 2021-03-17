@@ -45,6 +45,8 @@ class StockApi():
             #insert new data here
             if(not math.isnan((self.unclean_data.iloc[count].to_list())[0])):
                 self.new_data.update({self.new_time_stamp:self.unclean_data.iloc[count].to_list()})
+                for i in range(4):
+                    self.new_data[self.new_time_stamp][i] = (round(self.new_data[self.new_time_stamp][i], 2))
         #return the new data
         return self.new_data
     #END
