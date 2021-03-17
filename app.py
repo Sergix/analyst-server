@@ -4,6 +4,7 @@ from search_api_handler import SearchApi
 from stock_api_handler import StockApi
 import news.handler as news
 import news.ml as news_data_set
+import yfinance as yf
 import json
 
 
@@ -75,6 +76,23 @@ def data_set():
     return abort(404, description="The Requested Resource is not Available.")
   else:
     abort(400)
-    
+@app.route('/analyst-report/')
+def report():
+  t = request.args['ticker']
+  test = yf.Ticker(t)
+  return json.dumps(
+    {
+      "name": test.info["longName"],
+      "BusinessSummary": test.info["longBusinessSummary"], 
+      "employees": test.info["fullTimeEmployees"],
+      "sector": test.info["sector"],
+      "volume": test.info["volume"],
+      "open": test.info["open"],
+      "high": test.info["fiftyTwoWeekHigh"],
+      "low": test.info["fiftyTwoWeekLow"],
+      "close": test.info["previousClose"],
+      "dividend": test.info["dividendRate"],
+      "marketCap": test.info["marketCap"]
+    }, indent=2)
 if __name__ == "__main__":
   app.run()

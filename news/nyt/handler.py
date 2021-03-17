@@ -14,7 +14,7 @@ import os
 class NewsApi():
     def __init__(self):
         self.url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"
-        self.apiKey = os.environ['nyt_api_key']
+        self.apiKey = '8ybuxiDjnm5V9WxJj3XSLGYzB5FIAqIm'
     
     def createQuery(self, ticker):
         self.queryParam = {
