@@ -11,7 +11,7 @@ import json
 
 
 app = Flask(__name__)
-CORS(app, origins=['127.0.0.1:5000'])
+CORS(app)
 
 @app.route("/stockQuery/")
 def stock_query():
