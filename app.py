@@ -41,12 +41,8 @@ def stock_query():
 def search_query():
   if request.method == "GET":
     t = request.args['ticker']
-    l = request.args.get('limit')
     try:
-      if (l) and (t):
-        return tickerHandler().fetchData(t, l)
-      else: 
-        return tickerHandler().fetchData(t)
+      return tickerHandler().fetchData(t)
     except OSError as err:
         print(err)
         return abort(404, description="Failed to compute")

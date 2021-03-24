@@ -9,7 +9,7 @@ class tickerHandler():
       with open('search_tikers.json') as json_file:
          self.data = json.load(json_file)["data"]["rows"]
       if(ticker.strip() == "" ):
-         for x in range(25):
+         for x in range(limit):
             self.sortedData.append({ 'name': self.data[x]['name'], 'symbol': self.data[x]['symbol'] })
       else:
          for i in range(len(self.data)):
