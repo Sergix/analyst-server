@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, abort
 from flask_cors import CORS
-from search_api_handler import SearchApi
+# from search_api_handler import SearchApi
+from beta_search_api_handler import tickerHandler
 from stock_api_handler import StockApi
 import news.handler as news
 import news.ml as news_data_set
@@ -10,7 +11,7 @@ import json
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=['127.0.0.1:5000'])
 
 @app.route("/stockQuery/")
 def stock_query():
@@ -38,19 +39,22 @@ def stock_query():
     
 @app.route("/searchQuery/")
 def search_query():
-  #if client requesting data -get- 
   if request.method == "GET":
-    searchApi = SearchApi()
-    #our ticker aka stock letter
-    keyword = request.args['ticker']
+    t = request.args['ticker']
+    l = request.args.get('limit')
     try:
-      return(searchApi.search_data(keyword))
+      if (l) and (t):
+        return tickerHandler().fetchData(t, l)
+      else: 
+        return tickerHandler().fetchData(t)
     except OSError as err:
-      print(err)
-      return abort(404, description="Resource not found")
+        print(err)
+        return abort(404, description="Failed to compute")
   else:
     #abort bad request
     abort(400)
+  
+
 @app.route("/newsQuery/")
 def news_query():
   #if client requesting data -get- 
@@ -94,5 +98,6 @@ def report():
       "dividend": test.info["dividendRate"],
       "marketCap": test.info["marketCap"]
     }, indent=2)
+
 if __name__ == "__main__":
   app.run()

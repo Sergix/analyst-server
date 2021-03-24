@@ -12,26 +12,30 @@ import json
 class SearchApi():
     def __init__(self):
         #create static url
-        self.url = "https://ticker-2e1ica8b9.now.sh/keyword/"
+        # self.url = "https://ticker-2e1ica8b9.now.sh/keyword/"
+        self.url = ""
     #END
-    def search_data(self, keyword):
-        self.query = self.url + keyword
-        #query the srtring and the store api's response
-        self.apiResp = req.urlopen(self.query)
-        #if connection is connected
-        if(self.apiResp.isclosed() == False):
-            #Store json Data
-            self.json = json.load(self.apiResp)
-        else:
-            raise ValueError('Error: Api Connection Failed')
-        #return the data cleaned
-        return self.clean_data()
-    #END
-    def clean_data(self):
-        #create a dictionary to store new data 
-        self.new_data = {}
+
+    def search_data(self, keyword)
+
+    # def search_data(self, keyword):
+    #     self.query = self.url + keyword
+    #     #query the srtring and the store api's response
+    #     self.apiResp = req.urlopen(self.query)
+    #     #if connection is connected
+    #     if(self.apiResp.isclosed() == False):
+    #         #Store json Data
+    #         self.json = json.load(self.apiResp)
+    #     else:
+    #         raise ValueError('Error: Api Connection Failed')
+    #     #return the data cleaned
+    #     return self.clean_data()
+    # #END
+    # def clean_data(self):
+    #     #create a dictionary to store new data 
+    #     self.new_data = {}
         
-        #return that data
-        self.new_data.update({'ticker_data':self.json})
-        return self.new_data
-    #END
+    #     #return that data
+    #     self.new_data.update({'ticker_data':self.json})
+    #     return self.new_data
+    # #END
