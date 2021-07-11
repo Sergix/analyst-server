@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+mongoDb/create_data.py
+mongoDb/find_data.py
+mongoDb/stock_list.json
+ml/handler.py

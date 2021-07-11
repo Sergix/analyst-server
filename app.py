@@ -5,6 +5,7 @@ from beta_search_api_handler import tickerHandler
 from stock_api_handler import StockApi
 import news.handler as news
 import news.ml as news_data_set
+from web_scraper import webScraper as wb
 import yfinance as yf
 import json
 
@@ -72,10 +73,18 @@ def news_query():
 def data_set():
   if request.method == "GET":
     #our ticker aka stock letter
-    #t = request.args['ticker'
+    #t = request.args['ticker']
     return abort(404, description="The Requested Resource is not Available.")
   else:
     abort(400)
+
+@app.route('/scrape/')
+def scrape_data():
+  if request.method == "GET":
+    return wb().scrape()
+  else:
+    abort(400)
+
 @app.route('/analyst-report/')
 def report():
   t = request.args['ticker']
