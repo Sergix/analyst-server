@@ -1,3 +1,4 @@
+import pymongo
 import json
 
 class tickerHandler():
@@ -6,14 +7,9 @@ class tickerHandler():
       self.sortedData = []
 
    def fetchData(self, ticker, limit=15):
-      with open('search_tikers.json') as json_file:
-         self.data = json.load(json_file)["data"]["rows"]
-      if ticker.strip():
-         for i in range(len(self.data)):
-            if (len(self.sortedData) <= limit):
-               if (ticker.strip().upper() in self.data[i]['name'].upper()[0:len(ticker)]) or (ticker.strip().upper() in self.data[i]['symbol'].upper()[0:len(ticker)]):
-                  self.sortedData.append({ 'name': self.data[i]['name'], 'symbol': self.data[i]['symbol'] })
-      else:
-         for x in range(limit):
-            self.sortedData.append({ 'name': self.data[x]['name'], 'symbol': self.data[x]['symbol'] })
-      return json.dumps({ 'ticker_data': self.sortedData }, indent=2)
+      client = pymongo.MongoClient("mongodb+srv://admin:Soccer121$@main.u7pjf.mongodb.net/Main?retryWrites=true&w=majority")
+      db = client["app"]
+      mycol = db["stocks"]
+      data = mycol.find({ "$text": { "$search": str(ticker) } }, 
+                        { "_id": 0, "symbol": 1, "name": 1 })
+      return json.dumps( { "ticker_data": list(data) }, indent=2)
