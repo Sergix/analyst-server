@@ -1,5 +1,6 @@
 import pymongo
 import json
+import os
 
 class tickerHandler():
    def __init__ (self):
@@ -7,7 +8,8 @@ class tickerHandler():
       self.sortedData = []
 
    def fetchData(self, ticker, limit=15):
-      client = pymongo.MongoClient("mongodb+srv://admin:Soccer121$@main.u7pjf.mongodb.net/Main?retryWrites=true&w=majority")
+      mongoKey = os.environ.get('mongo_key')
+      client = pymongo.MongoClient("mongodb+srv://admin:" + mongoKey + "@main.u7pjf.mongodb.net/Main?retryWrites=true&w=majority")
       db = client["app"]
       mycol = db["stocks"]
       data = mycol.find({ "$text": { "$search": str(ticker) } }, 
